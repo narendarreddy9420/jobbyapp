@@ -88,7 +88,7 @@ class JobsPortal extends Component {
 
     const jwtToken = Cookies.get('jwt_token')
     const options = {
-      Authorization: `Bearer ${jwtToken}`,
+      headers: {Authorization: `Bearer ${jwtToken}`},
       method: 'GET',
     }
     const response = await fetch(apiUrl, options)

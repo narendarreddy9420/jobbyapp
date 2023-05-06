@@ -59,7 +59,7 @@ class JobFullDetails extends Component {
     const {id} = params
     const apiUrl = `https://apis.ccbp.in/jobs/${id}`
     const options = {
-      Authorization: `Bearer ${jwtToken}`,
+      headers: {Authorization: `Bearer ${jwtToken}`},
       method: 'GET',
     }
     const response = await fetch(apiUrl, options)
