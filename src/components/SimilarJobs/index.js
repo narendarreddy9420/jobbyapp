@@ -10,10 +10,11 @@ const SimilarJobs = props => {
   } = eachDetails
   return (
     <li>
+      <h1>Description</h1>
       <img src={companyLogo} alt="" />
       <h1>{title}</h1>
       <p>{rating}</p>
-      <p>Description</p>
+      <h1>Description</h1>
       <p>{jobDescription}</p>
       <p>{location}</p>
       <p>{employmentType}</p>

@@ -18,29 +18,6 @@ class JobFullDetails extends Component {
     this.getResults()
   }
 
-  getSkillsData = data1 => ({
-    imageUrl: data1.image_url,
-    name: data1.name,
-  })
-
-  getLifeAtCompany = data1 => ({
-    description: data1.description,
-    rating: data1.rating,
-  })
-
-  getFetchedData = (data1, jobSkills, jobLife) => ({
-    companyLogo: data1.company_logo_url,
-    companyWebsite: data1.company_website_url,
-    employmentType: data1.employment_type,
-    id: data1.id,
-    jobDescription: data1.job_description,
-    skills: jobSkills,
-    lifeAtCompany: jobLife,
-    location: data1.location,
-    package: data1.package_per_annum,
-    rating: data1.rating,
-  })
-
   getSimilarJobs = data1 => ({
     companyLogo: data1.company_logo_url,
     employmentType: data1.employment_type,
@@ -50,6 +27,10 @@ class JobFullDetails extends Component {
     rating: data1.rating,
     title: data1.title,
   })
+
+  onClickbutton = () => {
+    this.setState({apiStatus: apiStatus1.failure})
+  }
 
   getResults = async () => {
     this.setState({apiStatus: apiStatus1.inProgress})
@@ -65,13 +46,21 @@ class JobFullDetails extends Component {
     const response = await fetch(apiUrl, options)
     const data = await response.json()
     if (response.ok === true) {
-      const jobSkills = this.getSkillsData(data.skills)
-      const jobLife = this.getLifeAtCompany(data.life_at_company)
-      const jobDetails = this.getFetchedData(
-        data.job_details,
-        jobSkills,
-        jobLife,
-      )
+      const data1 = data.job_details
+      const jobDetails = {
+        imageUrl: data1.skills.image_url,
+        name: data1.skills.name,
+        description: data1.life_at_company.description,
+        imageUrl1: data1.life_at_company.image_url,
+        companyLogo: data1.company_logo_url,
+        companyWebsite: data1.company_website_url,
+        employmentType: data1.employment_type,
+        id: data1.id,
+        jobDescription: data1.job_description,
+        location: data1.location,
+        package1: data1.package_per_annum,
+        rating: data1.rating,
+      }
       const similarJobs = data.similar_jobs.map(each =>
         this.getSimilarJobs(each),
       )
@@ -80,7 +69,8 @@ class JobFullDetails extends Component {
         similarJobs1: similarJobs,
         apiStatus: apiStatus1.success,
       })
-    } else {
+    }
+    if (response.status === 404) {
       this.setState({apiStatus: apiStatus1.failure})
     }
   }
@@ -88,29 +78,38 @@ class JobFullDetails extends Component {
   renderSuccessView = () => {
     const {jobDetails1, similarJobs1} = this.state
     const {
+      imageUrl,
+      name,
+      description,
+      imageUrl1,
       companyLogo,
       employmentType,
+      companyWebsite,
       jobDescription,
-      skills,
-      lifeAtCompany,
       location,
       rating,
+      package1,
     } = jobDetails1
     return (
       <div>
-        <img src={companyLogo} alt="" />
+        <img src={companyLogo} alt="job details company logo" />
 
         <p>{rating}</p>
         <p>{location}</p>
-
+        <a href={companyWebsite}>Visit</a>
         <p>{employmentType}</p>
         <h1>Description</h1>
         <p>{jobDescription}</p>
-        <p>Skills</p>
-        <p>{skills}</p>
-        <p>life at company</p>
-        <p>{lifeAtCompany}</p>
+        <h1>Skills</h1>
+        <img src={imageUrl} alt="name" />
+        <p>{name}</p>
+        <h1>Life at Company</h1>
+        <p>{description}</p>
+        <p>{package1}</p>
+        <img src={imageUrl1} alt="" />
+
         <ul>
+          <h1>Similar Jobs</h1>
           {similarJobs1.map(each => (
             <SimilarJobs eachDetails={each} key={each.id} />
           ))}
@@ -125,11 +124,13 @@ class JobFullDetails extends Component {
       <div>
         <img
           src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-          alt=""
+          alt="failure view"
         />
-        <h1>Oops!Something Went Wrong</h1>
+        <h1>Oops! Something Went Wrong</h1>
         <p>we cannot seem to find the page you are looking for</p>
-        <button type="button">Retry</button>
+        <button type="button" onClick={this.onClickbutton}>
+          Retry
+        </button>
       </div>
     </div>
   )

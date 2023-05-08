@@ -11,7 +11,8 @@ const FilterJobs = props => {
 
       return (
         <li key={each.employmentTypeId} onClick={onClickEmploymentTypeId}>
-          {each.label}
+          <input type="checkbox" id="employee" />
+          <label htmlFor="employee">{each.label}</label>
         </li>
       )
     })
@@ -33,7 +34,8 @@ const FilterJobs = props => {
       }
       return (
         <li key={each.salaryRangeId} onClick={onClickSalary}>
-          {each.label}
+          <input type="radio" id="salary1" name="salary" value={each.label} />
+          <label htmlFor="salary1">{each.label}</label>
         </li>
       )
     })
@@ -63,6 +65,8 @@ const FilterJobs = props => {
     return (
       <div>
         <input
+          type="search"
+          data-testid="searchButton"
           value={searchInput}
           onChange={onChangeSearchInput}
           onKeyDown={onChangeKey}
@@ -73,7 +77,9 @@ const FilterJobs = props => {
 
   return (
     <div>
+      <h1>Type of Employment</h1>
       {renderEmploymentDetails1()}
+      <h1>Salary Range</h1>
       {renderSalaryDetails1()}
       {renderSearchDetails1()}
     </div>

@@ -11,16 +11,27 @@ const Header = props => {
 
   return (
     <div>
-      <img src="https://assets.ccbp.in/frontend/react-js/logo-img.png" alt="" />
-      <Link to="/">
-        <button type="button">Home</button>
-      </Link>
-      <Link to="/jobs">
-        <button type="button">Jobs</button>
-      </Link>
-      <button onClick={onLogout} type="button">
-        Logout
-      </button>
+      <ul>
+        <li>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+            alt="website logo"
+          />
+        </li>
+        <li>
+          <Link to="/">
+            <button type="button">Home</button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/jobs">
+            <button type="button">Jobs</button>
+          </Link>
+        </li>
+        <button onClick={onLogout} type="button">
+          Logout
+        </button>
+      </ul>
     </div>
   )
 }

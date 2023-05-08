@@ -16,12 +16,12 @@ const JobsCard = props => {
     <div>
       <Link to={`/jobs/${id}`}>
         <li>
-          <img src={companyLogoUrl} alt="" />
+          <img src={companyLogoUrl} alt="company_logo_url" />
           <h1>{title}</h1>
           <p>{rating}</p>
           <p>{location}</p>
           <p>{employmentType}</p>
-          <p>Description</p>
+          <h1>Description</h1>
           <p>{jobDescription}</p>
         </li>
       </Link>

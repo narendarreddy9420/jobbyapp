@@ -16,10 +16,12 @@ const Home = () => {
         Millions of people are searching for jobs,salary information,company
         reviews.Find job that fit your abilities and potential
       </p>
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/home-sm-bg.png"
-        alt="website logo"
-      />
+      <Link to="/">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+          alt="website logo"
+        />
+      </Link>
       <Link to="/jobs">
         <button type="button">Find Jobs</button>
       </Link>

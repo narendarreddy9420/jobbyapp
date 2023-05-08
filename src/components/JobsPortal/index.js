@@ -81,6 +81,10 @@ class JobsPortal extends Component {
     this.getResults()
   }
 
+  onClickButton = () => {
+    this.setState({apiStatus: apiStatus1.failure})
+  }
+
   getResults = async () => {
     this.setState({apiStatus: apiStatus1.inProgress})
     const {typeOfEmployment, minPackage, searchInput} = this.state
@@ -105,18 +109,18 @@ class JobsPortal extends Component {
         title: each.title,
       }))
       this.setState({dataList: updatedData, apiStatus: apiStatus1.success})
-    } else {
+    }
+    if (response.status === 401) {
       this.setState({apiStatus: apiStatus1.failure})
     }
   }
 
   renderSuccessView = () => {
     const {dataList} = this.state
-    const dataLength = dataList.Length > 0
+    const dataLength = dataList.length > 0
 
     return dataLength ? (
       <div>
-        <ProfileInfo />
         <ul>
           {dataList.map(each => (
             <JobsCard eachDetails={each} key={each.id} />
@@ -139,11 +143,13 @@ class JobsPortal extends Component {
       <div>
         <img
           src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-          alt=""
+          alt="failure view"
         />
         <h1>Oops!Something Went Wrong</h1>
-        <p>we cannot seem to find the page you are looking for</p>
-        <button type="button">Retry</button>
+        <p>We cannot seem to find the page you are looking for</p>
+        <button type="button" onClick={this.onClickButton}>
+          Retry
+        </button>
       </div>
     </div>
   )
@@ -173,6 +179,7 @@ class JobsPortal extends Component {
     return (
       <div>
         <Header />
+        <ProfileInfo />
         <FilterJobs
           employmentTypesList={employmentTypesList}
           salaryRangesList={salaryRangesList}
