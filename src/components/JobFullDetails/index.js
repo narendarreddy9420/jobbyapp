@@ -69,8 +69,7 @@ class JobFullDetails extends Component {
         similarJobs1: similarJobs,
         apiStatus: apiStatus1.success,
       })
-    }
-    if (response.status === 404) {
+    } else {
       this.setState({apiStatus: apiStatus1.failure})
     }
   }
@@ -107,9 +106,8 @@ class JobFullDetails extends Component {
         <p>{description}</p>
         <p>{package1}</p>
         <img src={imageUrl1} alt="" />
-
+        <h1>Similar Jobs</h1>
         <ul>
-          <h1>Similar Jobs</h1>
           {similarJobs1.map(each => (
             <SimilarJobs eachDetails={each} key={each.id} />
           ))}

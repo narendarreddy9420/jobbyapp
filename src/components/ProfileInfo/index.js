@@ -13,18 +13,19 @@ class ProfileInfo extends Component {
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/profile'
     const options = {
-      Authorization: `Bearer ${jwtToken}`,
+      headers: {Authorization: `Bearer ${jwtToken}`},
       method: 'GET',
     }
 
     const response = await fetch(apiUrl, options)
     const data = await response.json()
     if (response.ok) {
-      const fetchedData = data.profile_details.map(each => ({
+      const each = data.profile_details
+      const fetchedData = {
         name: each.name,
         profileUrl: each.profile_image_url,
         shortBio: each.short_bio,
-      }))
+      }
       this.setState({profileInfo: fetchedData})
     }
   }

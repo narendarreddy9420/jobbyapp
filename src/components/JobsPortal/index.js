@@ -109,8 +109,7 @@ class JobsPortal extends Component {
         title: each.title,
       }))
       this.setState({dataList: updatedData, apiStatus: apiStatus1.success})
-    }
-    if (response.status === 401) {
+    } else {
       this.setState({apiStatus: apiStatus1.failure})
     }
   }

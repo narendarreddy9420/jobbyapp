@@ -33,7 +33,7 @@ const FilterJobs = props => {
         onClickSalary1(each.salaryRangeId)
       }
       return (
-        <li key={each.salaryRangeId} onClick={onClickSalary}>
+        <li key={each.salaryRangeId} onClick={onClickSalary} defaultChecked>
           <input type="radio" id="salary1" name="salary" value={each.label} />
           <label htmlFor="salary1">{each.label}</label>
         </li>

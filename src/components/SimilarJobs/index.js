@@ -11,7 +11,7 @@ const SimilarJobs = props => {
   return (
     <li>
       <h1>Description</h1>
-      <img src={companyLogo} alt="" />
+      <img src={companyLogo} alt="company_logo_url" />
       <h1>{title}</h1>
       <p>{rating}</p>
       <h1>Description</h1>
